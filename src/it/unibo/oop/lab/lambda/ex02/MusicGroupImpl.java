@@ -36,8 +36,8 @@ public final class MusicGroupImpl implements MusicGroup {
     @Override
     public Stream<String> orderedSongNames() {
         return songs.stream()
-        		.sorted((Song s1, Song s2) -> s1.getSongName().compareTo(s2.getSongName()))
-        		.map(s -> s.getSongName());
+        			.sorted((Song s1, Song s2) -> s1.getSongName().compareTo(s2.getSongName()))
+        			.map(s -> s.getSongName());
     }
 
     @Override
@@ -62,7 +62,7 @@ public final class MusicGroupImpl implements MusicGroup {
 
     @Override
     public int countSongsInNoAlbum() {
-        return (int) songs.stream()
+        return (int)songs.stream()
         		.filter(s -> s.getAlbumName().isEmpty())
         		.count();
     }
@@ -85,7 +85,10 @@ public final class MusicGroupImpl implements MusicGroup {
 
     @Override
     public Optional<String> longestAlbum() {
-        return null;
+        return null;  /*songs.stream()
+        		.filter(s -> s.getAlbumName().isPresent())
+        		.collect(Collectors.groupingBy(s -> s.getAlbumName().get()))*/
+        		
     }
 
     private static final class Song {
