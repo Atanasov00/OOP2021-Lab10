@@ -85,10 +85,12 @@ public final class MusicGroupImpl implements MusicGroup {
 
     @Override
     public Optional<String> longestAlbum() {
-        return null;  /*songs.stream()
+        return songs.stream()
         		.filter(s -> s.getAlbumName().isPresent())
-        		.collect(Collectors.groupingBy(s -> s.getAlbumName().get()))*/
-        		
+        		.collect(Collectors.groupingBy(s -> s.albumName, Collectors.summingDouble(s -> s.getDuration())))
+        		.entrySet().stream()
+        		.collect(Collectors.maxBy(Comparator.comparingDouble(e -> e.getValue())))
+        		.flatMap(e -> e.getKey());   		
     }
 
     private static final class Song {
